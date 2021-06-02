@@ -5,9 +5,7 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
-        <OnClick motion:targetId="@+id/register" />
-    </Transition>
+        motion:duration="1000" />
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
@@ -34,10 +32,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_padding_size_medium"
-            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent" />
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/usernameLayout"
             android:layout_width="0dp"

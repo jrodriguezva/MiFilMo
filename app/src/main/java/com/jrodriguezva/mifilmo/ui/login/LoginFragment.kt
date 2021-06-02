@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -89,6 +90,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 binding.usernameEdit.text.toString(),
                 binding.passwordEdit.text.toString()
             )
+        }
+
+        binding.register.setOnClickListener { view ->
+            val direction = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+            view.findNavController().navigate(direction)
         }
     }
 
