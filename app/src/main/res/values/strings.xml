@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">MiFilMo</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+
+    <string name="required">Required.</string>
+
+    <string name="error_password_length">The password should be at least 6 character.</string>
+    <string name="error_email_format">The email address is badly formatted.</string>
+    <string name="error_authentication">Error, Authentication failed.</string>
+    <string name="content_description_loading">Loading</string>
+
 </resources>
