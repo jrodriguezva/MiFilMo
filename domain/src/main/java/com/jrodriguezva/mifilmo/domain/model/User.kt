@@ -1,10 +1,9 @@
 package com.jrodriguezva.mifilmo.domain.model
 
 data class User(
-    val photoUrl: String?,
-    val name: String?,
     val email: String?,
-    val phone: String?,
+    var photoUrl: String?,
+    var name: String?,
     val providerId: String,
     val uid: String
 )

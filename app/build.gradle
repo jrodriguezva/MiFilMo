@@ -68,6 +68,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.0"
 
     implementation "com.google.dagger:hilt-android:$hilt_version"
@@ -77,6 +78,8 @@ dependencies {
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
 
 
 }

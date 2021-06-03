@@ -4,12 +4,16 @@
     <string name="password">Password</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
-
     <string name="required">Required.</string>
-
     <string name="error_password_length">The password should be at least 6 character.</string>
     <string name="error_email_format">The email address is badly formatted.</string>
     <string name="error_authentication">Error, Authentication failed.</string>
     <string name="content_description_loading">Loading</string>
+    <string name="user_image">User image</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="phone_optional">Phone (optional)</string>
+    <string name="error_min_name_length">The name should be at least 2 character.</string>
+    <string name="error_max_name_length">The name should be a maximum 15 character.</string>
 
 </resources>

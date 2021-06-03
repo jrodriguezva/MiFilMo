@@ -6,4 +6,5 @@ interface UserNetworkDataSource {
     fun getCurrentUser(): User?
     suspend fun registerUser(email: String, password: String): User?
     suspend fun login(email: String, password: String): User?
+    suspend fun updateUser(user: User)
 }

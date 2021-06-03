@@ -72,6 +72,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
         android:layout_marginTop="@dimen/margin_padding_size_medium"
         app:errorEnabled="true"
         app:layout_constraintTop_toBottomOf="@+id/usernameLayout"

@@ -21,9 +21,17 @@ class AuthRepositoryImpl(private val userNetworkDataSource: UserNetworkDataSourc
     }
 
 
-    override fun registerUser(email: String, password: String): Flow<Resource<User>> = flow {
+    override fun registerUser(
+        email: String,
+        password: String,
+        name: String,
+        photoUrl: String?
+    ): Flow<Resource<User>> = flow {
         emit(Resource.Loading)
         userNetworkDataSource.registerUser(email, password)?.let {
+            it.photoUrl = photoUrl
+            it.name = name
+            userNetworkDataSource.updateUser(it)
             emit(Resource.Success(it))
         } ?: emit(Resource.Failure(RegisterError))
     }

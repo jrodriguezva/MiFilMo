@@ -5,6 +5,7 @@ import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -61,22 +62,21 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     }
                 }
                 launch {
-                    viewModel.passError.flowWithLifecycle(
-                        viewLifecycleOwner.lifecycle,
-                        Lifecycle.State.STARTED
-                    ).collect {
+                    viewModel.passError.collect {
                         binding.passwordLayout.error = it
                     }
                 }
                 launch {
-                    viewModel.loading.flowWithLifecycle(
-                        viewLifecycleOwner.lifecycle,
-                        Lifecycle.State.STARTED
-                    ).collect {
+                    viewModel.loading.collect {
                         if (!it) {
                             animation.end()
                             binding.container.transitionToEnd()
                         }
+                    }
+                }
+                launch {
+                    viewModel.logged.collect {
+                        Toast.makeText(requireContext(), "Usuario $it", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

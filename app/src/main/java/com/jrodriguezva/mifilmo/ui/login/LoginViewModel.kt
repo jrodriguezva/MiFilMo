@@ -1,8 +1,6 @@
 package com.jrodriguezva.mifilmo.ui.login
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jrodriguezva.mifilmo.R
@@ -14,9 +12,7 @@ import com.jrodriguezva.mifilmo.utils.ResourceProvider
 import com.jrodriguezva.mifilmo.utils.ValidatorUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,7 +23,7 @@ class LoginViewModel @Inject constructor(
     private val resourceProvider: ResourceProvider,
     private val validatorUtil: ValidatorUtil
 ) : ViewModel() {
-    private val _loading = MutableStateFlow(false)
+    private val _loading = MutableStateFlow(true)
     val loading: StateFlow<Boolean> get() = _loading
 
     private val _emailError = MutableStateFlow("")
@@ -39,8 +35,8 @@ class LoginViewModel @Inject constructor(
     private val _passError = MutableStateFlow("")
     val passError: StateFlow<String> get() = _passError
 
-    private val _logged = MutableLiveData<User?>()
-    val logged: LiveData<User?> = _logged
+    private val _logged = MutableSharedFlow<User>()
+    val logged: SharedFlow<User> = _logged
 
     init {
         viewModelScope.launch {
@@ -49,8 +45,8 @@ class LoginViewModel @Inject constructor(
                     is Resource.Loading -> _loading.value = true
                     is Resource.Success -> {
                         Log.e("a", "${it.data}")
-                        _logged.value = it.data
-                        _loading.value = true
+                        _logged.emit(it.data)
+                        _loading.value = false
                     }
                     else -> {
                         Log.e("a", "$it")
@@ -77,7 +73,7 @@ class LoginViewModel @Inject constructor(
                     is Resource.Loading -> _loading.value = true
                     is Resource.Success -> {
                         Log.e("a", "${it.data}")
-                        _logged.value = it.data
+                        _logged.tryEmit(it.data)
                         _loading.value = true
                     }
                     else -> {
