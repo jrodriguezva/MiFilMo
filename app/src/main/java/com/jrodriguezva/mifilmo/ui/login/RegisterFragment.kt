@@ -35,29 +35,19 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    viewModel.emailError.collect {
-                        binding.emailLayout.error = it
-                    }
+                    viewModel.emailError.collect { binding.emailLayout.error = it }
                 }
                 launch {
-                    viewModel.nameError.collect {
-                        binding.nameLayout.error = it
-                    }
+                    viewModel.nameError.collect { binding.nameLayout.error = it }
                 }
                 launch {
-                    viewModel.passError.collect {
-                        binding.passwordLayout.error = it
-                    }
+                    viewModel.passError.collect { binding.passwordLayout.error = it }
                 }
                 launch {
-                    viewModel.registerError.collect {
-                        binding.emailLayout.error = it
-                    }
+                    viewModel.registerError.collect { binding.emailLayout.error = it }
                 }
                 launch {
-                    viewModel.loading.collect {
-                        binding.loading.visible = it
-                    }
+                    viewModel.loading.collect { binding.loading.visible = it }
                 }
             }
         }

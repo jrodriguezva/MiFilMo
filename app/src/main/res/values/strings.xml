@@ -11,9 +11,10 @@
     <string name="content_description_loading">Loading</string>
     <string name="user_image">User image</string>
     <string name="name">Name</string>
-    <string name="surname">Surname</string>
-    <string name="phone_optional">Phone (optional)</string>
     <string name="error_min_name_length">The name should be at least 2 character.</string>
     <string name="error_max_name_length">The name should be a maximum 15 character.</string>
 
+    <string name="theme">Theme</string>
+    <string name="overview">Overview</string>
+    <string name="language">Language</string>
 </resources>

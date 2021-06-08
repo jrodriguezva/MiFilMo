@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MimoFilms</string>
+    <string name="language">Idioma</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="sign_in">Entrar</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="theme">Tema</string>
+    <string name="overview">Resumen</string>
+    <string name="required">Campo requerido.</string>
+    <string name="error_password_length">La contraseña debe tener más de 6 caracteres.</string>
+    <string name="error_email_format">El formato de email es incorrecto</string>
+    <string name="error_authentication">Comprueba el usuario o la contraseña</string>
+    <string name="content_description_loading">Cargando</string>
+    <string name="user_image">Imagen de usuario</string>
+    <string name="name">Nombre</string>
+    <string name="error_min_name_length">El nombre tiene que tener más de dos caracteres.</string>
+    <string name="error_max_name_length">El nombre no puede tener más de 15 caracteres</string>
+</resources>
