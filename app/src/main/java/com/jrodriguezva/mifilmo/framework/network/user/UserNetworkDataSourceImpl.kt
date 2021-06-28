@@ -1,12 +1,13 @@
-package com.jrodriguezva.mifilmo.framework.network
+package com.jrodriguezva.mifilmo.framework.network.user
 
 import androidx.core.net.toUri
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.storage.FirebaseStorage
-import com.jrodriguezva.mifilmo.data.datasource.UserNetworkDataSource
+import com.jrodriguezva.mifilmo.data.datasource.network.UserNetworkDataSource
 import com.jrodriguezva.mifilmo.domain.model.User
+import com.jrodriguezva.mifilmo.framework.mapper.toDomain
 import kotlinx.coroutines.tasks.await
 
 class UserNetworkDataSourceImpl(

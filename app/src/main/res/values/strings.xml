@@ -17,4 +17,7 @@
     <string name="theme">Theme</string>
     <string name="overview">Overview</string>
     <string name="language">Language</string>
+    <string name="my_films">My films</string>
+    <string name="all">All films</string>
+    <string name="image_movie">Movie</string>
 </resources>

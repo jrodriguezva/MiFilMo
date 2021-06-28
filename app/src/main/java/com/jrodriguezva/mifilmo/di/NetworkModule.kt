@@ -5,12 +5,21 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
-import com.jrodriguezva.mifilmo.data.datasource.UserNetworkDataSource
-import com.jrodriguezva.mifilmo.framework.network.UserNetworkDataSourceImpl
+import com.jrodriguezva.mifilmo.BuildConfig
+import com.jrodriguezva.mifilmo.data.datasource.network.MovieNetworkDataSource
+import com.jrodriguezva.mifilmo.data.datasource.network.UserNetworkDataSource
+import com.jrodriguezva.mifilmo.framework.network.NetworkUtils
+import com.jrodriguezva.mifilmo.framework.network.movie.MovieNetworkDataSourceImpl
+import com.jrodriguezva.mifilmo.framework.network.movie.TMDBApi
+import com.jrodriguezva.mifilmo.framework.network.user.UserNetworkDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -22,8 +31,7 @@ object NetworkModule {
     fun provideUserNetworkDataSource(
         auth: FirebaseAuth,
         storage: FirebaseStorage
-    ): UserNetworkDataSource =
-        UserNetworkDataSourceImpl(auth, storage)
+    ): UserNetworkDataSource = UserNetworkDataSourceImpl(auth, storage)
 
     @Singleton
     @Provides
@@ -32,4 +40,37 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideFirebaseStorage() = Firebase.storage
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        return OkHttpClient
+            .Builder()
+            .addInterceptor(interceptor)
+            .followRedirects(false)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .addConverterFactory(MoshiConverterFactory.create().withNullSerialization())
+        .client(okHttpClient)
+        .baseUrl(BuildConfig.API_BASE_URL)
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideMovieNetworkDataSource(
+        retrofit: Retrofit,
+        networkUtils: NetworkUtils
+    ): MovieNetworkDataSource =
+        MovieNetworkDataSourceImpl(
+            retrofit.create(TMDBApi::class.java),
+            BuildConfig.API_KEY,
+            networkUtils
+        )
 }

@@ -17,4 +17,7 @@
     <string name="name">Nombre</string>
     <string name="error_min_name_length">El nombre tiene que tener más de dos caracteres.</string>
     <string name="error_max_name_length">El nombre no puede tener más de 15 caracteres</string>
+    <string name="my_films">Mis películas</string>
+    <string name="all">Todas</string>
+    <string name="image_movie">Película</string>
 </resources>

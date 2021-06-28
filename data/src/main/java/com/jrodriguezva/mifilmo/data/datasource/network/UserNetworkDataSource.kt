@@ -1,4 +1,4 @@
-package com.jrodriguezva.mifilmo.data.datasource
+package com.jrodriguezva.mifilmo.data.datasource.network
 
 import com.jrodriguezva.mifilmo.domain.model.User
 

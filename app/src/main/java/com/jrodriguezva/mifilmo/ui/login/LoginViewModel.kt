@@ -73,7 +73,7 @@ class LoginViewModel @Inject constructor(
                     is Resource.Loading -> _loading.value = true
                     is Resource.Success -> {
                         Log.e("a", "${it.data}")
-                        _logged.tryEmit(it.data)
+                        _logged.emit(it.data)
                         _loading.value = true
                     }
                     else -> {
