@@ -1,5 +1,6 @@
 package com.jrodriguezva.mifilmo.ui.movies
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jrodriguezva.mifilmo.domain.model.Movie
@@ -22,6 +23,7 @@ class MovieListViewModel @Inject constructor(
     private val getAllMovies: GetAllMovies,
 ) : ViewModel() {
 
+    private val TAG: String = "MovieListViewModel"
     private val _loading = MutableStateFlow(false)
     val loading: StateFlow<Boolean> = _loading
 
@@ -36,10 +38,17 @@ class MovieListViewModel @Inject constructor(
             discoverResultUseCase(fromInit).collect {
                 when (it) {
                     is Resource.Success -> {
+                        Log.e(TAG, "getNextPage: Success")
                         _loading.value = false
                     }
-                    is Resource.Failure -> _loading.value = false
-                    Resource.Loading -> _loading.value = true
+                    is Resource.Failure -> {
+                        Log.e(TAG, "getNextPage: Failure")
+                        _loading.value = false
+                    }
+                    Resource.Loading -> {
+                        Log.e(TAG, "getNextPage: Loading")
+                        _loading.value = true
+                    }
                 }
             }
         }

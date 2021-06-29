@@ -19,9 +19,9 @@ class MovieRepositoryImpl(
 ) : MovieRepository {
 
     override fun checkRequireNewPage(fromInit: Boolean, sortBy: String) = flow {
+        emit(Resource.Loading)
         val page = movieLocalDataSource.getLastPage() + 1
         if (!fromInit || page == 1) {
-            emit(Resource.Loading)
             when (val result = movieNetworkDataSource.discoverMovies(
                 page,
                 sortBy,
@@ -33,6 +33,8 @@ class MovieRepositoryImpl(
                 }
                 else -> emit(result)
             }
+        } else {
+            emit(Resource.Failure(EmptyCache))
         }
     }.flowOn(dispatcher)
 
