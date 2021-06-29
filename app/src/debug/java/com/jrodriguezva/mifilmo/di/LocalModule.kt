@@ -3,8 +3,10 @@ package com.jrodriguezva.mifilmo.di
 import android.content.Context
 import androidx.room.Room
 import com.jrodriguezva.mifilmo.data.datasource.local.MovieLocalDataSource
+import com.jrodriguezva.mifilmo.data.datasource.preferences.PreferenceDataSource
 import com.jrodriguezva.mifilmo.framework.local.movie.MovieDatabase
 import com.jrodriguezva.mifilmo.framework.local.movie.MovieLocalDataSourceImpl
+import com.jrodriguezva.mifilmo.framework.local.preferences.PreferenceDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +23,11 @@ object LocalModule {
     @Singleton
     fun provideMovieLocalDataSource(db: MovieDatabase): MovieLocalDataSource =
         MovieLocalDataSourceImpl(db)
+
+    @Provides
+    @Singleton
+    fun providePreferenceDataSource(@ApplicationContext context: Context): PreferenceDataSource =
+        PreferenceDataSourceImpl(context)
 
     @Singleton
     @Provides

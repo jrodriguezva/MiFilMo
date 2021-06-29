@@ -50,7 +50,6 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
 
                 launch {
                     viewModel.movies.collect {
-                        Toast.makeText(requireContext(), "${it.size}", Toast.LENGTH_SHORT).show()
                         binding.recycler.visible = true
                         adapter.submitList(it)
                     }

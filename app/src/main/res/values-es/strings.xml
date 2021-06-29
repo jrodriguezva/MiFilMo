@@ -20,4 +20,7 @@
     <string name="my_films">Mis películas</string>
     <string name="all">Todas</string>
     <string name="image_movie">Película</string>
+    <string name="people">Persona</string>
+    <string name="cast">Reparto</string>
+    <string name="image_timer">Tiempo</string>
 </resources>

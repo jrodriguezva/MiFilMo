@@ -3,7 +3,6 @@ package com.jrodriguezva.mifilmo.ui.movies.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.databinding.ItemMovieBinding
 import com.jrodriguezva.mifilmo.domain.model.Movie
+import com.jrodriguezva.mifilmo.ui.movies.MovieListFragmentDirections
 import com.jrodriguezva.mifilmo.utils.extensions.loadPoster
 
 class DiscoverMoviesAdapter : ListAdapter<Movie, DiscoverMoviesAdapter.DiscoverMoviesViewHolder>(
@@ -50,7 +50,7 @@ class DiscoverMoviesAdapter : ListAdapter<Movie, DiscoverMoviesAdapter.DiscoverM
 
                 card.animation = AnimationUtils.loadAnimation(itemView.context, R.anim.down_to_up)
                 card.setOnClickListener {
-                    Toast.makeText(it.context, "${item.id}", Toast.LENGTH_SHORT).show()
+                    navigateToDetail(item)
                 }
                 card.isChecked = item.checked
                 image.loadPoster(item.posterPath.orEmpty(), 500)
@@ -59,6 +59,13 @@ class DiscoverMoviesAdapter : ListAdapter<Movie, DiscoverMoviesAdapter.DiscoverM
                 rating.setRating(item.voteAverage)
             }
 
+        }
+
+        private fun navigateToDetail(item: Movie) {
+            val dir = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(
+                item.id
+            )
+            binding.root.findNavController().navigate(dir)
         }
     }
 }

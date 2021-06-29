@@ -20,4 +20,7 @@
     <string name="my_films">My films</string>
     <string name="all">All films</string>
     <string name="image_movie">Movie</string>
+    <string name="people">People</string>
+    <string name="cast">Cast</string>
+    <string name="image_timer">Timer</string>
 </resources>

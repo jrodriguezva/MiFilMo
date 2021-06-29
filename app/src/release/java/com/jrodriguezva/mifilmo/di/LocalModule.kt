@@ -9,6 +9,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import com.jrodriguezva.mifilmo.data.datasource.preferences.PreferenceDataSource
+import com.jrodriguezva.mifilmo.framework.local.preferences.PreferenceDataSourceImpl
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -18,6 +20,11 @@ object LocalModule {
     @Provides
     @Singleton
     fun provideLocalDataSource(db: RickAndMortyDatabase): LocalDataSource = RoomDataSource(db)
+
+    @Provides
+    @Singleton
+    fun providePreferenceDataSource(@ApplicationContext context: Context): PreferenceDataSource =
+        PreferenceDataSourceImpl(context)
 
     @Singleton
     @Provides

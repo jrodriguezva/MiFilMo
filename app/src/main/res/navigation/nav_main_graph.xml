@@ -9,6 +9,20 @@
         android:id="@+id/movieListFragment"
         android:name="com.jrodriguezva.mifilmo.ui.movies.MovieListFragment"
         android:label="MovieListFragment"
-        tools:layout="@layout/fragment_movie_list" />
+        tools:layout="@layout/fragment_movie_list">
+        <action
+            android:id="@+id/action_movieListFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.jrodriguezva.mifilmo.ui.moviedetail.MovieDetailFragment"
+        android:label="MovieDetailFragment"
+        tools:layout="@layout/fragment_movie_detail">
+
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

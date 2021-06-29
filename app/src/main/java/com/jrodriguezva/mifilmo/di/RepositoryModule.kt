@@ -3,6 +3,7 @@ package com.jrodriguezva.mifilmo.di
 import com.jrodriguezva.mifilmo.data.datasource.local.MovieLocalDataSource
 import com.jrodriguezva.mifilmo.data.datasource.network.MovieNetworkDataSource
 import com.jrodriguezva.mifilmo.data.datasource.network.UserNetworkDataSource
+import com.jrodriguezva.mifilmo.data.datasource.preferences.PreferenceDataSource
 import com.jrodriguezva.mifilmo.data.repository.AuthRepositoryImpl
 import com.jrodriguezva.mifilmo.data.repository.MovieRepositoryImpl
 import com.jrodriguezva.mifilmo.domain.repository.AuthRepository
@@ -30,9 +31,15 @@ object RepositoryModule {
     fun provideMovieRepository(
         movieNetworkDataSource: MovieNetworkDataSource,
         movieLocalDataSource: MovieLocalDataSource,
+        preferenceDataSource: PreferenceDataSource,
         dispatcher: CoroutineDispatcher,
     ): MovieRepository =
-        MovieRepositoryImpl(movieNetworkDataSource, movieLocalDataSource, dispatcher)
+        MovieRepositoryImpl(
+            movieNetworkDataSource,
+            movieLocalDataSource,
+            preferenceDataSource,
+            dispatcher
+        )
 
     @Singleton
     @Provides

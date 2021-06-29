@@ -2,9 +2,12 @@ package com.jrodriguezva.mifilmo.framework.mapper
 
 import com.google.firebase.auth.FirebaseUser
 import com.jrodriguezva.mifilmo.domain.model.Movie
+import com.jrodriguezva.mifilmo.domain.model.People
 import com.jrodriguezva.mifilmo.domain.model.User
-import com.jrodriguezva.mifilmo.framework.local.movie.MovieDB
+import com.jrodriguezva.mifilmo.framework.local.movie.model.MovieDB
+import com.jrodriguezva.mifilmo.framework.local.movie.model.PeopleDB
 import com.jrodriguezva.mifilmo.framework.network.movie.MovieResult
+import com.jrodriguezva.mimofilms.data.remote.CastResponse
 
 
 fun FirebaseUser.toDomain(): User = User(
@@ -76,3 +79,9 @@ fun MovieResult.toDomain(page: Int) = Movie(
     tagline = this.tagline,
     page = page,
 )
+
+fun CastResponse.toDomain() = People(id, name, character, profilePath, order)
+
+fun People.toDatabase() = PeopleDB(peopleId, name, character, profilePath, order)
+
+fun PeopleDB.toDomain() = People(peopleId, name, character, profilePath, order)

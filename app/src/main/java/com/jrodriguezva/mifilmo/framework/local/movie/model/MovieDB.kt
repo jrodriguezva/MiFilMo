@@ -1,4 +1,4 @@
-package com.jrodriguezva.mifilmo.framework.local.movie
+package com.jrodriguezva.mifilmo.framework.local.movie.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -21,5 +21,5 @@ data class MovieDB(
     val runtime: Int?,
     val status: String?,
     val tagline: String?,
-    val page: Int,
+    var page: Int,
 )

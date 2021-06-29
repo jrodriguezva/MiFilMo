@@ -18,8 +18,7 @@ import javax.inject.Inject
 class MovieListViewModel @Inject constructor(
     private val discoverResultUseCase: DiscoverMoreMovies,
     private val getAllMovies: GetAllMovies,
-
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _loading = MutableStateFlow(false)
     val loading: StateFlow<Boolean> = _loading
