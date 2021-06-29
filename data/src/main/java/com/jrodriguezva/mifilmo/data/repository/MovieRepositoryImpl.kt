@@ -36,6 +36,8 @@ class MovieRepositoryImpl(
         }
     }.flowOn(dispatcher)
 
+    override suspend fun clearData() = movieLocalDataSource.clearData()
+
     override fun getMovieDetails(id: Int) = movieLocalDataSource.getMovie(id).flowOn(dispatcher)
 
     private suspend fun updateMovieDetails(movieId: Int) {

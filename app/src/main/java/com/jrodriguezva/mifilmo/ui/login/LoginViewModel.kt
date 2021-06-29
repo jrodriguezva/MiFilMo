@@ -12,7 +12,11 @@ import com.jrodriguezva.mifilmo.utils.ResourceProvider
 import com.jrodriguezva.mifilmo.utils.ValidatorUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -44,13 +48,12 @@ class LoginViewModel @Inject constructor(
                 when (it) {
                     is Resource.Loading -> _loading.value = true
                     is Resource.Success -> {
-                        Log.e("a", "${it.data}")
                         _logged.emit(it.data)
+                        delay(5_000)
                         _loading.value = false
                     }
                     else -> {
-                        Log.e("a", "$it")
-                        delay(5_000)
+                        delay(1_000)
                         _loading.value = false
                     }
                 }

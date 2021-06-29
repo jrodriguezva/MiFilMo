@@ -69,7 +69,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     viewModel.loading.collect {
                         if (!it) {
                             animation.end()
-                            binding.container.transitionToEnd()
                         }
                     }
                 }

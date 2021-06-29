@@ -1,17 +1,22 @@
 package com.jrodriguezva.mifilmo.ui.main
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.MenuItem
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.databinding.ActivityMainBinding
+import com.jrodriguezva.mifilmo.ui.base.BaseActivity
 import com.jrodriguezva.mifilmo.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 

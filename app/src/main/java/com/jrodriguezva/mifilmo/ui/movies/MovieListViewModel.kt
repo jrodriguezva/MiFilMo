@@ -6,6 +6,7 @@ import com.jrodriguezva.mifilmo.domain.model.Movie
 import com.jrodriguezva.mifilmo.domain.model.Resource
 import com.jrodriguezva.mifilmo.domain.usecase.DiscoverMoreMovies
 import com.jrodriguezva.mifilmo.domain.usecase.GetAllMovies
+import com.jrodriguezva.mifilmo.domain.usecase.RemoveAllData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieListViewModel @Inject constructor(
     private val discoverResultUseCase: DiscoverMoreMovies,
+    private val removeAllData: RemoveAllData,
     private val getAllMovies: GetAllMovies,
 ) : ViewModel() {
 
@@ -43,4 +45,15 @@ class MovieListViewModel @Inject constructor(
         }
     }
 
+    fun refreshData() {
+        viewModelScope.launch {
+            if (removeAllData()) {
+                getNextPage(false)
+            }
+        }
+    }
+
+    fun onClickFavorite(movie: Movie) {
+
+    }
 }

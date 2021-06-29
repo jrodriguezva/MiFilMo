@@ -1,30 +1,32 @@
 package com.jrodriguezva.mifilmo.ui.movies
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.databinding.FragmentMovieListBinding
+import com.jrodriguezva.mifilmo.ui.login.LoginActivity
 import com.jrodriguezva.mifilmo.ui.movies.adapter.DiscoverMoviesAdapter
+import com.jrodriguezva.mifilmo.ui.settings.SettingsActivity
 import com.jrodriguezva.mifilmo.utils.extensions.endless
 import com.jrodriguezva.mifilmo.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
 
     private var fragmentBinding: FragmentMovieListBinding? = null
-    private val viewModel by activityViewModels<MovieListViewModel>()
-    private val adapter = DiscoverMoviesAdapter()
+    private val viewModel by viewModels<MovieListViewModel>()
+    private lateinit var adapter: DiscoverMoviesAdapter
 
     companion object {
         fun newInstance() = MovieListFragment()
@@ -35,6 +37,7 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentMovieListBinding.bind(view)
         fragmentBinding = binding
+        adapter = DiscoverMoviesAdapter(viewModel::onClickFavorite)
         setBindings(binding)
         setObservers(binding)
     }
@@ -67,10 +70,28 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
         binding.swipeToRefresh.setOnRefreshListener {
             viewModel.getNextPage(true)
         }
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.settings -> {
+                    settingActivity.launch(Intent(requireContext(), SettingsActivity::class.java))
+                    true
+                }
+                R.id.profile -> {
+                    startActivity(Intent(requireContext(), LoginActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     override fun onDestroyView() {
         fragmentBinding = null
         super.onDestroyView()
     }
+
+    private val settingActivity =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            viewModel.refreshData()
+        }
 }

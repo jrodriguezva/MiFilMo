@@ -13,4 +13,5 @@ interface MovieRepository {
     fun getPeopleByMovie(movieId: Int): Flow<Resource<List<People>>>
     fun checkRequireNewPage(fromInit: Boolean, sortBy: String): Flow<Resource<List<Movie>>>
 
+    suspend fun clearData(): Boolean
 }

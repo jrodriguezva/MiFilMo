@@ -23,4 +23,7 @@
     <string name="people">Persona</string>
     <string name="cast">Reparto</string>
     <string name="image_timer">Tiempo</string>
+    <string name="application_header">Aplicación</string>
+    <string name="title_activity_settings">Configuración</string>
+    <string name="favorite_icon">Marcar película como favorita</string>
 </resources>

@@ -5,9 +5,11 @@ import com.jrodriguezva.mifilmo.domain.model.Movie
 import com.jrodriguezva.mifilmo.domain.model.People
 import com.jrodriguezva.mifilmo.framework.mapper.toDatabase
 import com.jrodriguezva.mifilmo.framework.mapper.toDomain
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 
-class MovieLocalDataSourceImpl(db: MovieDatabase) : MovieLocalDataSource {
+class MovieLocalDataSourceImpl(private val db: MovieDatabase) : MovieLocalDataSource {
     private val movieDao = db.movieDao()
     private val peopleDao = db.peopleDao()
     private val moviePeopleDao = db.moviePeopleDao()
@@ -23,6 +25,11 @@ class MovieLocalDataSourceImpl(db: MovieDatabase) : MovieLocalDataSource {
         val movie = data.toDatabase()
         movie.page = movieDao.getById(movieId).page
         movieDao.insert(movie)
+    }
+
+    override suspend fun clearData(): Boolean = withContext(Dispatchers.IO) {
+        db.clearAllTables()
+        true
     }
 
     override suspend fun insertMovies(movies: List<Movie>) {

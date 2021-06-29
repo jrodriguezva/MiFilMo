@@ -19,4 +19,5 @@ data class Movie(
     val status: String?,
     val tagline: String?,
     val page: Int,
+    var favorite: Boolean = false,
 )

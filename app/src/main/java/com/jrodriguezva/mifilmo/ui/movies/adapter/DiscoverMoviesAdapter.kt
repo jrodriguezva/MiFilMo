@@ -1,8 +1,16 @@
 package com.jrodriguezva.mifilmo.ui.movies.adapter
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AccelerateInterpolator
 import android.view.animation.AnimationUtils
+import android.view.animation.OvershootInterpolator
+import android.widget.ImageView
+import androidx.core.animation.doOnEnd
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,9 +21,9 @@ import com.jrodriguezva.mifilmo.domain.model.Movie
 import com.jrodriguezva.mifilmo.ui.movies.MovieListFragmentDirections
 import com.jrodriguezva.mifilmo.utils.extensions.loadPoster
 
-class DiscoverMoviesAdapter : ListAdapter<Movie, DiscoverMoviesAdapter.DiscoverMoviesViewHolder>(
-    diffCallback
-) {
+class DiscoverMoviesAdapter(private val onClickFavorite: (Movie) -> Unit) :
+    ListAdapter<Movie, DiscoverMoviesAdapter.DiscoverMoviesViewHolder>(diffCallback) {
+
     override fun onBindViewHolder(holder: DiscoverMoviesViewHolder, position: Int) {
         holder.bindTo(getItem(position))
     }
@@ -47,7 +55,10 @@ class DiscoverMoviesAdapter : ListAdapter<Movie, DiscoverMoviesAdapter.DiscoverM
 
         fun bindTo(item: Movie) {
             binding.apply {
-
+                favorite.setOnClickListener {
+                    item.favorite = !item.favorite
+                    startAnimation(favorite, item)
+                }
                 card.animation = AnimationUtils.loadAnimation(itemView.context, R.anim.down_to_up)
                 card.setOnClickListener {
                     navigateToDetail(item)
@@ -66,6 +77,53 @@ class DiscoverMoviesAdapter : ListAdapter<Movie, DiscoverMoviesAdapter.DiscoverM
                 item.id
             )
             binding.root.findNavController().navigate(dir)
+        }
+    }
+
+    private fun startAnimation(view: ImageView, character: Movie) {
+        val rotationAnim = if (character.favorite) {
+            ObjectAnimator.ofFloat(view, "rotation", 0f, 360f)
+        } else {
+            ObjectAnimator.ofFloat(view, "rotation", 360f, 0f)
+        }.apply {
+            duration = 300
+            interpolator = AccelerateInterpolator()
+        }
+
+        val bounceAnimX = ObjectAnimator.ofFloat(view, "scaleX", 0.2f, 1f).apply {
+            duration = 300
+            interpolator = OvershootInterpolator()
+        }
+
+        val bounceAnimY = ObjectAnimator.ofFloat(view, "scaleY", 0.2f, 1f).apply {
+            duration = 300
+            interpolator = OvershootInterpolator()
+        }
+
+        val colorAnim = if (character.favorite) {
+            ObjectAnimator.ofArgb(
+                view, "colorFilter",
+                ContextCompat.getColor(view.context, R.color.grey_700),
+                ContextCompat.getColor(view.context, R.color.red_700)
+            )
+        } else {
+            ObjectAnimator.ofArgb(
+                view, "colorFilter",
+                ContextCompat.getColor(view.context, R.color.red_700),
+                ContextCompat.getColor(view.context, R.color.grey_700)
+            )
+        }.apply {
+            duration = 600
+            interpolator = AccelerateDecelerateInterpolator()
+        }
+
+        AnimatorSet().apply {
+            play(rotationAnim).with(colorAnim)
+            play(bounceAnimX).with(bounceAnimY).after(rotationAnim)
+            doOnEnd {
+                onClickFavorite(character)
+            }
+            start()
         }
     }
 }

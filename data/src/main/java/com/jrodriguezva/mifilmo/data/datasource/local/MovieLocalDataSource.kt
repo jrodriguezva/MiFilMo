@@ -13,4 +13,5 @@ interface MovieLocalDataSource {
     suspend fun getLastPage(): Int
     suspend fun insertPeopleWithMovie(movieId: Int, peoples: List<People>)
     suspend fun updateMovie(movieId: Int, data: Movie)
+    suspend fun clearData(): Boolean
 }
