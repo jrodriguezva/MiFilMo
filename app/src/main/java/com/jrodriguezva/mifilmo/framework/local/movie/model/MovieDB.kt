@@ -22,5 +22,5 @@ data class MovieDB(
     val status: String?,
     val tagline: String?,
     var page: Int,
-    var favorite: Boolean,
+    var favorite: Boolean?,
 )

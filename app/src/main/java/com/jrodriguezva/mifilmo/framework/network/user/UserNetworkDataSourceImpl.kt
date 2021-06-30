@@ -3,6 +3,7 @@ package com.jrodriguezva.mifilmo.framework.network.user
 import androidx.core.net.toUri
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.storage.FirebaseStorage
 import com.jrodriguezva.mifilmo.data.datasource.network.UserNetworkDataSource
@@ -58,6 +59,15 @@ class UserNetworkDataSourceImpl(
     override suspend fun login(email: String, password: String): User? {
         return try {
             auth.signInWithEmailAndPassword(email, password).await().user?.toDomain()
+        } catch (exception: FirebaseException) {
+            null
+        }
+    }
+
+    override suspend fun loginWithGoogle(token: String): User? {
+        return try {
+            val credential = GoogleAuthProvider.getCredential(token, null)
+            auth.signInWithCredential(credential).await().user?.toDomain()
         } catch (exception: FirebaseException) {
             null
         }

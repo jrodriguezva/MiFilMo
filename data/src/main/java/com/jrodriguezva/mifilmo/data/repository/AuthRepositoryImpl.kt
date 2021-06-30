@@ -54,4 +54,11 @@ class AuthRepositoryImpl(
             emit(Resource.Success(it))
         } ?: emit(Resource.Failure(LoginError))
     }.flowOn(dispatcher)
+
+    override fun loginWithGoogle(token: String): Flow<Resource<User>> = flow {
+        emit(Resource.Loading)
+        userNetworkDataSource.loginWithGoogle(token)?.let {
+            emit(Resource.Success(it))
+        } ?: emit(Resource.Failure(LoginError))
+    }.flowOn(dispatcher)
 }

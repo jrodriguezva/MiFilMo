@@ -72,19 +72,33 @@ class LoginViewModel @Inject constructor(
         if (!checkForm(email, password)) return
         viewModelScope.launch {
             loginUseCase(email, password).collect {
-                when (it) {
-                    is Resource.Loading -> _loading.value = true
-                    is Resource.Success -> {
-                        Log.e("a", "${it.data}")
-                        _logged.emit(it.data)
-                        _loading.value = true
-                    }
-                    else -> {
-                        _loading.value = false
-                        _loginError.value =
-                            resourceProvider.getString(R.string.error_authentication)
-                    }
-                }
+                checkLogin(it)
+            }
+        }
+    }
+
+
+    fun signInWithGoogle(token: String) {
+        clearErrors()
+        viewModelScope.launch {
+            loginUseCase(token).collect {
+                checkLogin(it)
+            }
+        }
+    }
+
+    private suspend fun checkLogin(it: Resource<User>) {
+        when (it) {
+            is Resource.Loading -> _loading.value = true
+            is Resource.Success -> {
+                Log.e("a", "${it.data}")
+                _logged.emit(it.data)
+                _loading.value = true
+            }
+            else -> {
+                _loading.value = false
+                _loginError.value =
+                    resourceProvider.getString(R.string.error_authentication)
             }
         }
     }

@@ -5,4 +5,6 @@ import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(private val repository: AuthRepository) {
     operator fun invoke(email: String, password: String) = repository.login(email, password)
+
+    operator fun invoke(token: String) = repository.loginWithGoogle(token)
 }

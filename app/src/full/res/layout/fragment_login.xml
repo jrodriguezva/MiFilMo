@@ -28,20 +28,20 @@
         android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceHeadline2"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding_size_medium"
-        android:src="@drawable/ic_video"
         android:contentDescription="@string/content_description_loading"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:src="@drawable/ic_video"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         app:tint="?attr/colorOnSurface" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -50,13 +50,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_padding_size_large"
-        android:layout_marginEnd="@dimen/margin_padding_size_large"
         android:layout_marginTop="@dimen/margin_padding_size_small"
+        android:layout_marginEnd="@dimen/margin_padding_size_large"
         android:hint="@string/email"
         app:errorEnabled="true"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
         app:startIconDrawable="@drawable/ic_person">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -72,12 +72,12 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
         android:layout_marginTop="@dimen/margin_padding_size_medium"
         app:errorEnabled="true"
-        app:layout_constraintTop_toBottomOf="@+id/usernameLayout"
         app:layout_constraintEnd_toEndOf="@+id/usernameLayout"
-        app:layout_constraintStart_toStartOf="@+id/usernameLayout">
+        app:layout_constraintStart_toStartOf="@+id/usernameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/usernameLayout"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEdit"
@@ -99,21 +99,35 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding_size_small"
         android:text="@string/sign_in"
-        app:layout_constraintTop_toBottomOf="@+id/passwordLayout"
+        android:textAppearance="?attr/textAppearanceButton"
         app:layout_constraintEnd_toEndOf="@+id/usernameLayout"
-        app:layout_constraintStart_toStartOf="@+id/usernameLayout" />
+        app:layout_constraintStart_toStartOf="@+id/usernameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/register"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:tag="@dimen/margin_padding_size_medium"
         android:text="@string/sign_up"
-        app:layout_constraintTop_toBottomOf="@+id/login"
+        android:textAppearance="?attr/textAppearanceButton"
         app:layout_constraintEnd_toEndOf="@+id/usernameLayout"
-        app:layout_constraintStart_toStartOf="@+id/usernameLayout" />
+        app:layout_constraintStart_toStartOf="@+id/usernameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/login" />
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleSignIn"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_size_small"
+        android:textAllCaps="false"
+        android:textAppearance="?attr/textAppearanceButton"
+        app:buttonSize="wide"
+        app:colorScheme="auto"
+        app:layout_constraintEnd_toEndOf="@+id/usernameLayout"
+        app:layout_constraintStart_toStartOf="@+id/usernameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/register" />
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progress"

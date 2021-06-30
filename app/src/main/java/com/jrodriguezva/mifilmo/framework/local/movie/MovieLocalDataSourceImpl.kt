@@ -25,12 +25,15 @@ class MovieLocalDataSourceImpl(private val db: MovieDatabase) : MovieLocalDataSo
         } ?: emptyList()
 
     override suspend fun updateMovie(movieId: Int, data: Movie) {
-        movieDao.getById(movieId)?.let { movieDB ->
-            val movie = data.toDatabase()
+        val movie = data.toDatabase()
+        val movieDB = movieDao.getById(movieId)
+        if (movieDB != null) {
             movie.page = movieDB.page
             movie.favorite = data.favorite ?: movieDB.favorite
-            movieDao.insert(movie)
+        } else {
+            movie.page = -1
         }
+        movieDao.insert(movie)
     }
 
     override suspend fun clearData(): Boolean = withContext(Dispatchers.IO) {
