@@ -9,10 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.databinding.FragmentMovieListBinding
-import com.jrodriguezva.mifilmo.ui.login.LoginActivity
 import com.jrodriguezva.mifilmo.ui.movies.adapter.DiscoverMoviesAdapter
 import com.jrodriguezva.mifilmo.ui.settings.SettingsActivity
 import com.jrodriguezva.mifilmo.utils.extensions.endless
@@ -77,7 +78,8 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
                     true
                 }
                 R.id.profile -> {
-                    startActivity(Intent(requireContext(), LoginActivity::class.java))
+                    val dir = MovieListFragmentDirections.actionMovieListFragmentToProfileFragment()
+                    findNavController().navigate(dir)
                     true
                 }
                 else -> false

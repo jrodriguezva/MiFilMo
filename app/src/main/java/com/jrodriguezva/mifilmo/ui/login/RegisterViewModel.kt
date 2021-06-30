@@ -1,17 +1,18 @@
 package com.jrodriguezva.mifilmo.ui.login
 
-import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.domain.model.Resource
 import com.jrodriguezva.mifilmo.domain.model.User
-import com.jrodriguezva.mifilmo.domain.usecase.RegisterUserUseCase
+import com.jrodriguezva.mifilmo.domain.usecase.RegisterUser
+import com.jrodriguezva.mifilmo.utils.ResourceProvider
 import com.jrodriguezva.mifilmo.utils.ValidatorUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -19,8 +20,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val registerUserUseCase: RegisterUserUseCase,
-    private val validatorUtil: ValidatorUtil
+    private val registerUser: RegisterUser,
+    private val validatorUtil: ValidatorUtil,
+    private val resourceProvider: ResourceProvider,
 ) : ViewModel() {
     private val _loading = MutableStateFlow(false)
     val loading: StateFlow<Boolean> get() = _loading
@@ -40,8 +42,8 @@ class RegisterViewModel @Inject constructor(
     private var photo: String? = null
 
 
-    private val _registered = MutableLiveData<User?>()
-    val registered: LiveData<User?> = _registered
+    private val _registered = MutableSharedFlow<User>()
+    val registered: SharedFlow<User> = _registered
 
 
     private fun clearErrors() {
@@ -75,15 +77,16 @@ class RegisterViewModel @Inject constructor(
         clearErrors()
         if (!checkForm(email, password, name)) return
         viewModelScope.launch {
-            registerUserUseCase(email, password, name, photo).collect {
+            registerUser(email, password, name, photo).collect {
                 when (it) {
                     is Resource.Loading -> _loading.value = true
                     is Resource.Success -> {
                         Log.e("a", "${it.data}")
-                        _registered.value = it.data
+                        _registered.emit(it.data)
                         _loading.value = false
                     }
-                    else -> {
+                    is Resource.Failure -> {
+                        _registerError.value = resourceProvider.getString(R.string.error_register)
                         _loading.value = false
                     }
                 }

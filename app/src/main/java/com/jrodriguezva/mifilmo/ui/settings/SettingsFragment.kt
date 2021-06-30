@@ -11,7 +11,7 @@ import com.jrodriguezva.mifilmo.framework.local.preferences.MODE_NIGHT_NO
 import com.jrodriguezva.mifilmo.framework.local.preferences.MODE_NIGHT_YES
 import com.jrodriguezva.mifilmo.framework.local.preferences.PREFERENCE_LANGUAGE
 import com.jrodriguezva.mifilmo.framework.local.preferences.PREFERENCE_THEME
-import com.jrodriguezva.mifilmo.utils.restartApp
+import com.jrodriguezva.mifilmo.utils.extensions.restartApp
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.databinding.FragmentRegisterBinding
@@ -48,6 +49,13 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 }
                 launch {
                     viewModel.loading.collect { binding.loading.visible = it }
+                }
+                launch {
+                    viewModel.registered.collect {
+                        val direction = LoginFragmentDirections.actionLoginFragmentToMainActivity()
+                        findNavController().navigate(direction)
+                        requireActivity().finish()
+                    }
                 }
             }
         }

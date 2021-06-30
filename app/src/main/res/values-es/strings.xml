@@ -11,7 +11,8 @@
     <string name="required">Campo requerido.</string>
     <string name="error_password_length">La contraseña debe tener más de 6 caracteres.</string>
     <string name="error_email_format">El formato de email es incorrecto</string>
-    <string name="error_authentication">Comprueba el usuario o la contraseña</string>
+    <string name="error_authentication">Error, Comprueba el usuario o la contraseña</string>
+    <string name="error_register">Error, el registro ha fallado.</string>
     <string name="content_description_loading">Cargando</string>
     <string name="user_image">Imagen de usuario</string>
     <string name="name">Nombre</string>
@@ -29,4 +30,10 @@
     <string name="empty_favorite_image">Lista de imágenes favoritas vacía</string>
     <string name="empty_favorite">No has selecionado ninguna película como favorita.</string>
     <string name="favorite">Favoritas</string>
+    <string name="profile_image">Imagen de perfil</string>
+    <string name="delete_account">Borrar cuenta</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="delete_account_info">Esta acción borrará tu cuenta y la información relacionada con ella.</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
 </resources>

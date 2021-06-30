@@ -14,4 +14,6 @@ interface AuthRepository {
     ): Flow<Resource<User>>
 
     fun login(email: String, password: String): Flow<Resource<User>>
+    suspend fun deleteUser(): Boolean
+    fun logout()
 }

@@ -2,7 +2,7 @@ package com.jrodriguezva.mifilmo.domain.usecase
 
 import org.junit.jupiter.api.Test
 
-internal class GetCurrentUserUseCaseTest {
+internal class GetCurrentUserTest {
 
     @Test
     operator fun invoke() {

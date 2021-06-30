@@ -3,7 +3,7 @@ package com.jrodriguezva.mifilmo.ui.base
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.jrodriguezva.mifilmo.di.AppModule
-import com.jrodriguezva.mifilmo.utils.updateLocale
+import com.jrodriguezva.mifilmo.utils.extensions.updateLocale
 import dagger.hilt.android.EntryPointAccessors
 import java.util.Locale
 

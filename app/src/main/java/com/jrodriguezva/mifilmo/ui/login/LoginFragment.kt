@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.databinding.FragmentLoginBinding
+import com.jrodriguezva.mifilmo.utils.extensions.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ import kotlinx.coroutines.launch
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     companion object {
-        fun newInstance() = LoginFragment()
+        private const val RANDOM_IMAGE_URL = "https://source.unsplash.com/random/480x800"
     }
 
     private val viewModel by activityViewModels<LoginViewModel>()
@@ -46,6 +47,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.REVERSE
             start()
+        }
+
+        context?.loadImage(RANDOM_IMAGE_URL) { drawable ->
+            binding.container.background = drawable
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

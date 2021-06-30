@@ -9,6 +9,8 @@ import com.jrodriguezva.mifilmo.data.datasource.network.UserNetworkDataSource
 import com.jrodriguezva.mifilmo.domain.model.User
 import com.jrodriguezva.mifilmo.framework.mapper.toDomain
 import kotlinx.coroutines.tasks.await
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class UserNetworkDataSourceImpl(
     private val auth: FirebaseAuth,
@@ -17,7 +19,11 @@ class UserNetworkDataSourceImpl(
     override fun getCurrentUser() = auth.currentUser?.toDomain()
 
     override suspend fun registerUser(email: String, password: String): User? {
-        return auth.createUserWithEmailAndPassword(email, password).await().user?.toDomain()
+        return try {
+            auth.createUserWithEmailAndPassword(email, password).await().user?.toDomain()
+        } catch (expected: Exception) {
+            null
+        }
     }
 
     override suspend fun updateUser(user: User) {
@@ -31,6 +37,22 @@ class UserNetworkDataSourceImpl(
             photoUri = ref.downloadUrl.await()
         }
         auth.currentUser?.updateProfile(profileUpdates)?.await()
+    }
+
+    override suspend fun deleteUser() = suspendCoroutine<Boolean> { continuation ->
+        auth.currentUser?.run {
+            delete().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    continuation.resume(true)
+                } else {
+                    continuation.resume(false)
+                }
+            }
+        } ?: continuation.resume(false)
+    }
+
+    override fun logout() {
+        auth.signOut()
     }
 
     override suspend fun login(email: String, password: String): User? {

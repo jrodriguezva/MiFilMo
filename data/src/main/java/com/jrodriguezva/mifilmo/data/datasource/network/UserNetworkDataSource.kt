@@ -7,4 +7,6 @@ interface UserNetworkDataSource {
     suspend fun registerUser(email: String, password: String): User?
     suspend fun login(email: String, password: String): User?
     suspend fun updateUser(user: User)
+    suspend fun deleteUser(): Boolean
+    fun logout()
 }

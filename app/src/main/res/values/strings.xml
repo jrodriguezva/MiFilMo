@@ -8,6 +8,7 @@
     <string name="error_password_length">The password should be at least 6 character.</string>
     <string name="error_email_format">The email address is badly formatted.</string>
     <string name="error_authentication">Error, Authentication failed.</string>
+    <string name="error_register">Error, Register failed.</string>
     <string name="content_description_loading">Loading</string>
     <string name="user_image">User image</string>
     <string name="name">Name</string>
@@ -29,4 +30,10 @@
     <string name="empty_favorite_image">Empty favorite image</string>
     <string name="empty_favorite">You have not selected any favorite movie yet</string>
     <string name="favorite">Favorites</string>
+    <string name="profile_image">Profile image</string>
+    <string name="delete_account">Delete account</string>
+    <string name="logout">Logout</string>
+    <string name="delete_account_info">This action will delete your account and all information related to it.</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
 </resources>

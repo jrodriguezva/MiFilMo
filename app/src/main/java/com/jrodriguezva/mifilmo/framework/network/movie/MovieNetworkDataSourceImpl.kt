@@ -72,7 +72,6 @@ class MovieNetworkDataSourceImpl(
             val myRef = firebaseDatabase.reference.child(uid).child("movies")
             val listener = object : ChildEventListener {
                 override fun onCancelled(error: DatabaseError) {
-                    close(error.toException())
                 }
 
                 override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {

@@ -42,6 +42,12 @@ class AuthRepositoryImpl(
         } ?: emit(Resource.Failure(RegisterError))
     }.flowOn(dispatcher)
 
+    override suspend fun deleteUser() = userNetworkDataSource.deleteUser()
+    override fun logout() {
+        userNetworkDataSource.logout()
+    }
+
+
     override fun login(email: String, password: String): Flow<Resource<User>> = flow {
         emit(Resource.Loading)
         userNetworkDataSource.login(email, password)?.let {

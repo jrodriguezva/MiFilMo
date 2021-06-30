@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.domain.model.Resource
 import com.jrodriguezva.mifilmo.domain.model.User
-import com.jrodriguezva.mifilmo.domain.usecase.GetCurrentUserUseCase
+import com.jrodriguezva.mifilmo.domain.usecase.GetCurrentUser
 import com.jrodriguezva.mifilmo.domain.usecase.LoginUseCase
 import com.jrodriguezva.mifilmo.utils.ResourceProvider
 import com.jrodriguezva.mifilmo.utils.ValidatorUtil
@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val getCurrentUserUseCase: GetCurrentUserUseCase,
+    private val getCurrentUser: GetCurrentUser,
     private val loginUseCase: LoginUseCase,
     private val resourceProvider: ResourceProvider,
     private val validatorUtil: ValidatorUtil
@@ -44,7 +44,7 @@ class LoginViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getCurrentUserUseCase().collect {
+            getCurrentUser().collect {
                 when (it) {
                     is Resource.Loading -> _loading.value = true
                     is Resource.Success -> {
