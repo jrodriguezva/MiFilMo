@@ -3,13 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/movieListFragment">
+    app:startDestination="@id/favoriteMovieListFragment">
 
     <fragment
         android:id="@+id/movieListFragment"
         android:name="com.jrodriguezva.mifilmo.ui.movies.MovieListFragment"
         android:label="MovieListFragment"
         tools:layout="@layout/fragment_movie_list">
+        <action
+            android:id="@+id/action_movieListFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteMovieListFragment"
+        android:name="com.jrodriguezva.mifilmo.ui.favorite.FavoriteListFragment"
+        android:label="MovieListFragment"
+        tools:layout="@layout/fragment_favorite_movie_list">
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />

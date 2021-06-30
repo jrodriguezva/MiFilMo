@@ -3,11 +3,13 @@ package com.jrodriguezva.mifilmo.data.repository
 import com.jrodriguezva.mifilmo.data.datasource.local.MovieLocalDataSource
 import com.jrodriguezva.mifilmo.data.datasource.network.MovieNetworkDataSource
 import com.jrodriguezva.mifilmo.data.datasource.preferences.PreferenceDataSource
+import com.jrodriguezva.mifilmo.domain.model.Movie
 import com.jrodriguezva.mifilmo.domain.model.Resource
 import com.jrodriguezva.mifilmo.domain.model.exception.EmptyCache
 import com.jrodriguezva.mifilmo.domain.repository.MovieRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
@@ -39,6 +41,16 @@ class MovieRepositoryImpl(
     }.flowOn(dispatcher)
 
     override suspend fun clearData() = movieLocalDataSource.clearData()
+
+    override suspend fun getFavoriteMovies() {
+        try {
+            movieNetworkDataSource.getFavoriteMovies().collect {
+                movieLocalDataSource.updateMovie(it.id, it)
+            }
+        } catch (expected: Exception) {
+        }
+    }
+
 
     override fun getMovieDetails(id: Int) = movieLocalDataSource.getMovie(id).flowOn(dispatcher)
 
@@ -72,6 +84,14 @@ class MovieRepositoryImpl(
     }.flowOn(dispatcher)
 
     override fun discoverMovies() = movieLocalDataSource.getAllMovies().flowOn(dispatcher)
+
+    override fun discoverFavoriteMovies() =
+        movieLocalDataSource.getAllFavoriteMovies().flowOn(dispatcher)
+
+    override suspend fun saveFavoriteMovie(movie: Movie) {
+        movieLocalDataSource.updateMovie(movie.id, movie)
+        movieNetworkDataSource.saveFavoriteMovie(movie)
+    }
 
 
 }

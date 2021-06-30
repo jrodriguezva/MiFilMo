@@ -37,6 +37,7 @@ fun MovieDB.toDomain() = Movie(
     status = status,
     tagline = tagline,
     page = page,
+    favorite = favorite,
 )
 
 
@@ -58,6 +59,7 @@ fun Movie.toDatabase() = MovieDB(
     status = status,
     tagline = tagline,
     page = page,
+    favorite = favorite ?: false
 )
 
 fun MovieResult.toDomain(page: Int) = Movie(

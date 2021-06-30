@@ -26,4 +26,7 @@
     <string name="application_header">Application</string>
     <string name="title_activity_settings">Settings</string>
     <string name="favorite_icon">Favorite icon</string>
+    <string name="empty_favorite_image">Empty favorite image</string>
+    <string name="empty_favorite">You have not selected any favorite movie yet</string>
+    <string name="favorite">Favorites</string>
 </resources>

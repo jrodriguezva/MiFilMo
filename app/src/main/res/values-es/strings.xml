@@ -26,4 +26,7 @@
     <string name="application_header">Aplicación</string>
     <string name="title_activity_settings">Configuración</string>
     <string name="favorite_icon">Marcar película como favorita</string>
+    <string name="empty_favorite_image">Lista de imágenes favoritas vacía</string>
+    <string name="empty_favorite">No has selecionado ninguna película como favorita.</string>
+    <string name="favorite">Favoritas</string>
 </resources>

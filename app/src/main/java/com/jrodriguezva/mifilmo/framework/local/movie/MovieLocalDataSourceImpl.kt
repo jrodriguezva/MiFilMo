@@ -15,6 +15,9 @@ class MovieLocalDataSourceImpl(private val db: MovieDatabase) : MovieLocalDataSo
     private val moviePeopleDao = db.moviePeopleDao()
 
     override fun getAllMovies() = movieDao.getAll().map { movies -> movies.map { it.toDomain() } }
+    override fun getAllFavoriteMovies() =
+        movieDao.getAllFavorite().map { movies -> movies.map { it.toDomain() } }
+
     override fun getMovie(movieId: Int) = movieDao.findById(movieId).map { it.toDomain() }
     override suspend fun getPeoplesByMovie(movieId: Int) =
         moviePeopleDao.getPeoplesByMovie(movieId)?.run {
@@ -22,9 +25,12 @@ class MovieLocalDataSourceImpl(private val db: MovieDatabase) : MovieLocalDataSo
         } ?: emptyList()
 
     override suspend fun updateMovie(movieId: Int, data: Movie) {
-        val movie = data.toDatabase()
-        movie.page = movieDao.getById(movieId).page
-        movieDao.insert(movie)
+        movieDao.getById(movieId)?.let { movieDB ->
+            val movie = data.toDatabase()
+            movie.page = movieDB.page
+            movie.favorite = data.favorite ?: movieDB.favorite
+            movieDao.insert(movie)
+        }
     }
 
     override suspend fun clearData(): Boolean = withContext(Dispatchers.IO) {

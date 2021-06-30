@@ -2,6 +2,8 @@ package com.jrodriguezva.mifilmo.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
@@ -43,6 +45,14 @@ object NetworkModule {
 
     @Singleton
     @Provides
+    fun provideFirebaseDatabase(): FirebaseDatabase {
+        val database = Firebase.database
+        database.setPersistenceEnabled(true)
+        return database
+    }
+
+    @Singleton
+    @Provides
     fun provideOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -66,11 +76,15 @@ object NetworkModule {
     @Singleton
     fun provideMovieNetworkDataSource(
         retrofit: Retrofit,
-        networkUtils: NetworkUtils
+        networkUtils: NetworkUtils,
+        database: FirebaseDatabase,
+        auth: FirebaseAuth,
     ): MovieNetworkDataSource =
         MovieNetworkDataSourceImpl(
             retrofit.create(TMDBApi::class.java),
             BuildConfig.API_KEY,
+            database,
+            auth,
             networkUtils
         )
 }

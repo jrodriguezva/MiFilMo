@@ -56,8 +56,19 @@ class DiscoverMoviesAdapter(private val onClickFavorite: (Movie) -> Unit) :
         fun bindTo(item: Movie) {
             binding.apply {
                 favorite.setOnClickListener {
-                    item.favorite = !item.favorite
+                    item.favorite = !(item.favorite ?: false)
                     startAnimation(favorite, item)
+                }
+                if (item.favorite == true) {
+                    favorite.setColorFilter(
+                        ContextCompat.getColor(itemView.context, R.color.red_700),
+                        android.graphics.PorterDuff.Mode.MULTIPLY
+                    )
+                } else {
+                    favorite.setColorFilter(
+                        ContextCompat.getColor(itemView.context, R.color.grey_700),
+                        android.graphics.PorterDuff.Mode.MULTIPLY
+                    )
                 }
                 card.animation = AnimationUtils.loadAnimation(itemView.context, R.anim.down_to_up)
                 card.setOnClickListener {
@@ -81,7 +92,7 @@ class DiscoverMoviesAdapter(private val onClickFavorite: (Movie) -> Unit) :
     }
 
     private fun startAnimation(view: ImageView, character: Movie) {
-        val rotationAnim = if (character.favorite) {
+        val rotationAnim = if (character.favorite == true) {
             ObjectAnimator.ofFloat(view, "rotation", 0f, 360f)
         } else {
             ObjectAnimator.ofFloat(view, "rotation", 360f, 0f)
@@ -100,7 +111,7 @@ class DiscoverMoviesAdapter(private val onClickFavorite: (Movie) -> Unit) :
             interpolator = OvershootInterpolator()
         }
 
-        val colorAnim = if (character.favorite) {
+        val colorAnim = if (character.favorite == true) {
             ObjectAnimator.ofArgb(
                 view, "colorFilter",
                 ContextCompat.getColor(view.context, R.color.grey_700),

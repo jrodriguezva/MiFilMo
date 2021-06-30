@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MovieLocalDataSource {
     fun getAllMovies(): Flow<List<Movie>>
+    fun getAllFavoriteMovies(): Flow<List<Movie>>
     fun getMovie(movieId: Int): Flow<Movie>
     suspend fun getPeoplesByMovie(movieId: Int): List<People>
 
