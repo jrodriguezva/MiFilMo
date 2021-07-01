@@ -1,6 +1,5 @@
 package com.jrodriguezva.mifilmo.ui.moviedetail
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -77,13 +76,13 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         super.onDestroyView()
     }
 
-    override fun onAttach(context: Context) {
-        (activity as MainActivity).visibilityBottomNavigation(false)
-        super.onAttach(context)
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).visibilityBottomNavigation(true)
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        (activity as MainActivity).visibilityBottomNavigation(true)
+    override fun onResume() {
+        (activity as MainActivity).visibilityBottomNavigation(false)
+        super.onResume()
     }
 }

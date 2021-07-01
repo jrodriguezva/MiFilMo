@@ -3,9 +3,11 @@ package com.jrodriguezva.mifilmo.di
 import android.content.Context
 import androidx.room.Room
 import com.jrodriguezva.mifilmo.data.datasource.local.MovieLocalDataSource
+import com.jrodriguezva.mifilmo.data.datasource.local.PersonLocalDataSource
 import com.jrodriguezva.mifilmo.data.datasource.preferences.PreferenceDataSource
-import com.jrodriguezva.mifilmo.framework.local.movie.MovieDatabase
+import com.jrodriguezva.mifilmo.framework.local.MiFilMoDatabase
 import com.jrodriguezva.mifilmo.framework.local.movie.MovieLocalDataSourceImpl
+import com.jrodriguezva.mifilmo.framework.local.person.PersonLocalDataSourceImpl
 import com.jrodriguezva.mifilmo.framework.local.preferences.PreferenceDataSourceImpl
 import dagger.Module
 import dagger.Provides
@@ -17,12 +19,17 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object LocalModule {
-    private const val DATABASE_NAME = "movie.db"
+    private const val DATABASE_NAME = "mifilmo.db"
 
     @Provides
     @Singleton
-    fun provideMovieLocalDataSource(db: MovieDatabase): MovieLocalDataSource =
+    fun provideMovieLocalDataSource(db: MiFilMoDatabase): MovieLocalDataSource =
         MovieLocalDataSourceImpl(db)
+
+    @Provides
+    @Singleton
+    fun providePersonLocalDataSource(db: MiFilMoDatabase): PersonLocalDataSource =
+        PersonLocalDataSourceImpl(db)
 
     @Provides
     @Singleton
@@ -31,10 +38,10 @@ object LocalModule {
 
     @Singleton
     @Provides
-    fun provideDataBase(@ApplicationContext context: Context): MovieDatabase {
+    fun provideDataBase(@ApplicationContext context: Context): MiFilMoDatabase {
         return Room.databaseBuilder(
             context,
-            MovieDatabase::class.java,
+            MiFilMoDatabase::class.java,
             DATABASE_NAME
         ).fallbackToDestructiveMigration().build()
     }

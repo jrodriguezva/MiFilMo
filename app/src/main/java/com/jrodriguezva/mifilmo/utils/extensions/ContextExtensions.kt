@@ -2,6 +2,7 @@ package com.jrodriguezva.mifilmo.utils.extensions
 
 import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
@@ -34,7 +35,7 @@ fun Context.loadImage(url: String, onDownload: (Drawable) -> Unit) {
 }
 
 @Suppress("DEPRECATION")
-fun Context.updateLocale(localeToSwitchTo: Locale): Context {
+fun Context.updateLocale(localeToSwitchTo: Locale): ContextWrapper {
     var context = this
     val resources: Resources = context.resources
     val configuration: Configuration = resources.configuration
@@ -51,6 +52,6 @@ fun Context.updateLocale(localeToSwitchTo: Locale): Context {
     } else {
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
-    return context
+    return ContextWrapper(context)
 }
 

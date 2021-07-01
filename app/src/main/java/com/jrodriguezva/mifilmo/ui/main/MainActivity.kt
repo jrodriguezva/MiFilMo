@@ -1,22 +1,18 @@
 package com.jrodriguezva.mifilmo.ui.main
 
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.navigation.findNavController
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.databinding.ActivityMainBinding
-import com.jrodriguezva.mifilmo.ui.base.BaseActivity
 import com.jrodriguezva.mifilmo.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -25,6 +21,7 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupViews()
+        Log.e("BaseActivity", "onCreate: ")
     }
 
     private fun setupViews() {

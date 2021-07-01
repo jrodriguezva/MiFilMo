@@ -1,6 +1,5 @@
 package com.jrodriguezva.mifilmo.ui.profile
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -18,6 +17,7 @@ import com.jrodriguezva.mifilmo.databinding.FragmentProfileBinding
 import com.jrodriguezva.mifilmo.domain.model.User
 import com.jrodriguezva.mifilmo.ui.login.LoginActivity
 import com.jrodriguezva.mifilmo.ui.main.MainActivity
+import com.jrodriguezva.mifilmo.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -33,6 +33,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         fragmentBinding = FragmentProfileBinding.bind(view)
         setBindings()
         setObservers()
+        viewModel.loadCurrentUser()
     }
 
     private fun setObservers() {
@@ -42,6 +43,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     launch {
                         viewModel.user.collect {
                             setCharacterDetail(it)
+                        }
+                    }
+                    launch {
+                        viewModel.loading.collect {
+                            progress.visible = it
                         }
                     }
                     launch {
@@ -88,7 +94,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             load(it.photoUrl)
         }
         name.text = it.name
-        status.text = it.providerId
         email.text = it.email
         password.text = "********"
     }
@@ -97,10 +102,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(resources.getString(R.string.delete_account))
             .setMessage(resources.getString(R.string.delete_account_info))
-            .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
+            .setNegativeButton(resources.getString(R.string.cancel)) { dialog, _ ->
                 dialog.dismiss()
             }
-            .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
+            .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
                 viewModel.deleteAccount()
             }
             .show()
@@ -111,13 +116,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onDestroyView()
     }
 
-    override fun onAttach(context: Context) {
-        (activity as MainActivity).visibilityBottomNavigation(false)
-        super.onAttach(context)
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).visibilityBottomNavigation(true)
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        (activity as MainActivity).visibilityBottomNavigation(true)
+    override fun onResume() {
+        (activity as MainActivity).visibilityBottomNavigation(false)
+        super.onResume()
     }
 }

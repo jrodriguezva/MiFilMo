@@ -13,7 +13,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/top_app_bar" />
+        app:menu="@menu/top_app_bar"
+        app:title="@string/favorite" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -63,8 +64,8 @@
         android:id="@+id/emptyGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:visibility="visible"
         android:visibility="gone"
-        app:constraint_referenced_ids="image,textEmpty" />
+        app:constraint_referenced_ids="image,textEmpty"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

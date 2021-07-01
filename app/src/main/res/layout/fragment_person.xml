@@ -21,7 +21,7 @@
             app:expandedTitleTextAppearance="@style/TextAppearance.App.CollapsingToolbar.Expanded"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:statusBarScrim="?attr/colorPrimaryVariant"
-            app:title="">
+            app:title="asdfasdf">
 
             <com.jrodriguezva.mifilmo.ui.commons.SquareImageView
                 android:id="@+id/image"
@@ -41,7 +41,6 @@
                 android:background="@android:color/transparent"
                 android:elevation="0dp"
                 app:layout_collapseMode="pin"
-                app:menu="@menu/menu_logout"
                 app:titleTextColor="?attr/colorOnPrimary" />
 
 
@@ -70,11 +69,50 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/biographyCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_size_small"
+                android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileCard">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margin_padding_size_medium"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/biographyTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:drawablePadding="@dimen/margin_padding_size_small"
+                        android:text="@string/biography"
+                        android:textAlignment="textStart"
+                        android:textAppearance="?attr/textAppearanceSubtitle1" />
+
+                    <TextView
+                        android:id="@+id/biography"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/margin_padding_size_small"
+                        android:drawablePadding="@dimen/margin_padding_size_small"
+                        android:textAlignment="textStart"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        tools:text="@tools:sample/lorem/random" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/profileCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_padding_size_small"
                 android:layout_marginTop="@dimen/margin_padding_size_medium"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/progress">
@@ -82,8 +120,18 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_padding_size_medium"
-                    android:layout_marginVertical="@dimen/margin_padding_size_small">
+                    android:layout_margin="@dimen/margin_padding_size_medium">
+
+                    <TextView
+                        android:id="@+id/nameTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_padding_size_small"
+                        android:text="@string/name"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/name"
@@ -94,51 +142,57 @@
                         android:textAppearance="?attr/textAppearanceHeadline4"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/nameTitle"
                         tools:text="@tools:sample/full_names" />
 
-
                     <TextView
-                        android:id="@+id/email"
+                        android:id="@+id/birthdayTitle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/margin_padding_size_small"
+                        android:layout_marginTop="@dimen/margin_padding_size_xsmall"
+                        android:text="@string/birthday"
                         android:textAlignment="textStart"
-                        android:textAppearance="?attr/textAppearanceHeadline5"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        app:layout_constraintEnd_toEndOf="@+id/name"
                         app:layout_constraintStart_toStartOf="@+id/name"
-                        app:layout_constraintTop_toBottomOf="@+id/name"
+                        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+                    <TextView
+                        android:id="@+id/birthday"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        app:layout_constraintEnd_toEndOf="@+id/name"
+                        app:layout_constraintStart_toStartOf="@+id/name"
+                        app:layout_constraintTop_toBottomOf="@+id/birthdayTitle"
                         tools:text="@tools:sample/us_phones" />
 
                     <TextView
-                        android:id="@+id/password"
+                        android:id="@+id/placeOfBirthTitle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/margin_padding_size_small"
-                        android:inputType="textPassword"
+                        android:layout_marginTop="@dimen/margin_padding_size_xsmall"
+                        android:text="@string/place_of_birth"
                         android:textAlignment="textStart"
-                        android:textAppearance="?attr/textAppearanceHeadline5"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        app:layout_constraintEnd_toEndOf="@+id/name"
                         app:layout_constraintStart_toStartOf="@+id/name"
-                        app:layout_constraintTop_toBottomOf="@+id/email"
-                        tools:ignore="TextViewEdits"
+                        app:layout_constraintTop_toBottomOf="@+id/birthday" />
+
+                    <TextView
+                        android:id="@+id/placeOfBirth"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        app:layout_constraintEnd_toEndOf="@+id/name"
+                        app:layout_constraintStart_toStartOf="@+id/name"
+                        app:layout_constraintTop_toBottomOf="@+id/placeOfBirthTitle"
                         tools:text="@tools:sample/first_names" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/deleteAccountButton"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_padding_size_small"
-                android:layout_marginTop="@dimen/margin_padding_size_medium"
-                android:text="@string/delete_account"
-                android:textAppearance="?attr/textAppearanceButton"
-                app:icon="@drawable/ic_delete"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileCard" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

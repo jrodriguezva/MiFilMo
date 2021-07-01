@@ -1,6 +1,5 @@
 package com.jrodriguezva.mifilmo.framework.network.movie
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -55,7 +54,7 @@ class MovieNetworkDataSourceImpl(
         }
     }
 
-    override suspend fun getPeopleByMovie(movieId: Int, language: String): Resource<List<People>> {
+    override suspend fun getCastByMovie(movieId: Int, language: String): Resource<List<People>> {
         if (!networkUtils.isNetworkAvailable()) return Resource.Failure(NoConnectionAvailable)
         return api.getCredits(movieId, language, apiKey).run {
             if (isSuccessful) {
@@ -67,7 +66,6 @@ class MovieNetworkDataSourceImpl(
         }
     }
 
-    private val TAG = "MovieNetwork"
 
     @ExperimentalCoroutinesApi
     override fun getFavoriteMovies() = callbackFlow {
@@ -78,22 +76,18 @@ class MovieNetworkDataSourceImpl(
                 }
 
                 override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                    Log.d(TAG, "onChildMoved: $snapshot")
                     snapshot.getValue(Movie::class.java)?.let { trySend(it) }
                 }
 
                 override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                    Log.d(TAG, "onChildChanged: $snapshot")
                     snapshot.getValue(Movie::class.java)?.let { trySend(it) }
                 }
 
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                    Log.d(TAG, "onChildAdded: $snapshot")
                     snapshot.getValue(Movie::class.java)?.let { trySend(it) }
                 }
 
                 override fun onChildRemoved(snapshot: DataSnapshot) {
-                    Log.d(TAG, "onChildRemoved: $snapshot")
                     snapshot.getValue(Movie::class.java)?.let { movie ->
                         movie.favorite = false
                         trySend(movie)

@@ -45,5 +45,18 @@
         <argument
             android:name="movieId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_personFragment"
+            app:destination="@id/personFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="com.jrodriguezva.mifilmo.ui.person.PersonFragment"
+        android:label="PersonFragment"
+        tools:layout="@layout/fragment_person">
+        <argument
+            android:name="personId"
+            app:argType="integer" />
     </fragment>
 </navigation>

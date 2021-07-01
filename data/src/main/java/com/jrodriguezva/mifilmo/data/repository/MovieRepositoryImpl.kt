@@ -64,11 +64,11 @@ class MovieRepositoryImpl(
         }
     }
 
-    override fun getPeopleByMovie(movieId: Int) = flow {
+    override fun getCastByMovie(movieId: Int) = flow {
         emit(Resource.Loading)
         updateMovieDetails(movieId)
         when (val result =
-            movieNetworkDataSource.getPeopleByMovie(movieId, preferenceDataSource.getLanguage())) {
+            movieNetworkDataSource.getCastByMovie(movieId, preferenceDataSource.getLanguage())) {
             is Resource.Success -> {
                 movieLocalDataSource.insertPeopleWithMovie(movieId, result.data)
                 emit(result)

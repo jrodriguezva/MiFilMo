@@ -3,10 +3,14 @@ package com.jrodriguezva.mifilmo.framework.mapper
 import com.google.firebase.auth.FirebaseUser
 import com.jrodriguezva.mifilmo.domain.model.Movie
 import com.jrodriguezva.mifilmo.domain.model.People
+import com.jrodriguezva.mifilmo.domain.model.Person
 import com.jrodriguezva.mifilmo.domain.model.User
 import com.jrodriguezva.mifilmo.framework.local.movie.model.MovieDB
 import com.jrodriguezva.mifilmo.framework.local.movie.model.PeopleDB
+import com.jrodriguezva.mifilmo.framework.local.person.model.PersonDB
 import com.jrodriguezva.mifilmo.framework.network.movie.MovieResult
+import com.jrodriguezva.mifilmo.framework.network.person.PersonResult
+import com.jrodriguezva.mifilmo.utils.extensions.toDate
 import com.jrodriguezva.mimofilms.data.remote.CastResponse
 
 
@@ -86,4 +90,51 @@ fun CastResponse.toDomain() = People(id, name, character, profilePath, order)
 
 fun People.toDatabase() = PeopleDB(peopleId, name, character, profilePath, order)
 
+
 fun PeopleDB.toDomain() = People(peopleId, name, character, profilePath, order)
+
+fun PersonResult.toDomain() = Person(
+    adult,
+    alsoKnownAs,
+    biography,
+    birthday?.toDate(),
+    gender,
+    homepage,
+    id,
+    knownForDepartment,
+    name,
+    placeOfBirth,
+    popularity,
+    profilePath,
+)
+
+fun PersonDB.toDomain() = Person(
+    adult,
+    alsoKnownAs,
+    biography,
+    birthday,
+    gender,
+    homepage,
+    id,
+    knownForDepartment,
+    name,
+    placeOfBirth,
+    popularity,
+    profilePath,
+)
+
+fun Person.toDatabase() = PersonDB(
+    id,
+    adult,
+    alsoKnownAs,
+    biography,
+    birthday,
+    gender,
+    homepage,
+    knownForDepartment,
+    name,
+    placeOfBirth,
+    popularity,
+    profilePath,
+)
+

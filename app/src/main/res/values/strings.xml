@@ -36,4 +36,9 @@
     <string name="delete_account_info">This action will delete your account and all information related to it.</string>
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
+    <string name="birthday">Birthday</string>
+    <string name="place_of_birth">Place of birth</string>
+    <string name="biography">Biography</string>
+    <string name="known_for_department">Known for</string>
+    <string name="data">Datos</string>
 </resources>

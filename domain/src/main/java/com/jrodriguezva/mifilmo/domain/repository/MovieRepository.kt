@@ -11,7 +11,7 @@ interface MovieRepository {
     fun discoverFavoriteMovies(): Flow<List<Movie>>
     fun getMovieDetails(id: Int): Flow<Movie>
 
-    fun getPeopleByMovie(movieId: Int): Flow<Resource<List<People>>>
+    fun getCastByMovie(movieId: Int): Flow<Resource<List<People>>>
     fun checkRequireNewPage(fromInit: Boolean, sortBy: String): Flow<Resource<List<Movie>>>
 
     suspend fun clearData(): Boolean

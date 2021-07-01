@@ -6,7 +6,7 @@ import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -27,7 +27,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         private const val RANDOM_IMAGE_URL = "https://source.unsplash.com/random/480x800"
     }
 
-    private val viewModel by activityViewModels<LoginViewModel>()
+    private val viewModel by viewModels<LoginViewModel>()
     private var fragmentBinding: FragmentLoginBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

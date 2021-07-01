@@ -7,10 +7,8 @@ import com.jrodriguezva.mifilmo.domain.model.Movie
 import com.jrodriguezva.mifilmo.domain.model.People
 import com.jrodriguezva.mifilmo.domain.model.Resource
 import com.jrodriguezva.mifilmo.domain.usecase.GetMovie
-import com.jrodriguezva.mifilmo.domain.usecase.GetPeoplesMovie
-import dagger.assisted.AssistedInject
+import com.jrodriguezva.mifilmo.domain.usecase.GetCastByMovie
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
-    private val getPeopleMovie: GetPeoplesMovie,
+    private val getPeopleMovie: GetCastByMovie,
     getMovie: GetMovie,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {

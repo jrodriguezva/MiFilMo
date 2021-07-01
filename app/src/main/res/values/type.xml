@@ -38,8 +38,8 @@
     </style>
 
     <style name="TextAppearance.MyTheme.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="fontFamily">@font/nunito</item>
-        <item name="android:fontFamily">@font/nunito</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="android:fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">16sp</item>
     </style>
 

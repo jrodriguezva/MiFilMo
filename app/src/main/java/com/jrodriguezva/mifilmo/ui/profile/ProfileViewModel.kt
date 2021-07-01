@@ -33,14 +33,14 @@ class ProfileViewModel @Inject constructor(
     private val _user = MutableSharedFlow<User>()
     val user: SharedFlow<User> = _user
 
-    init {
+    fun loadCurrentUser() {
         viewModelScope.launch {
             getCurrentUser().collect {
                 when (it) {
                     is Resource.Loading -> _loading.value = true
                     is Resource.Success -> {
                         _user.emit(it.data)
-                        delay(5_000)
+                        delay(1_000)
                         _loading.value = false
                     }
                     else -> {

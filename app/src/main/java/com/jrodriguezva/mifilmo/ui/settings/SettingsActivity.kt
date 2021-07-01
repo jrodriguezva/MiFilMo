@@ -2,13 +2,13 @@ package com.jrodriguezva.mifilmo.ui.settings
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.databinding.ActivitySettingsBinding
-import com.jrodriguezva.mifilmo.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SettingsActivity : BaseActivity() {
+class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
 

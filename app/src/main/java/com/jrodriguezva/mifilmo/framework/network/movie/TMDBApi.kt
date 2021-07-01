@@ -1,5 +1,6 @@
 package com.jrodriguezva.mifilmo.framework.network.movie
 
+import com.jrodriguezva.mifilmo.framework.network.person.PersonResult
 import com.jrodriguezva.mimofilms.data.remote.CreditsResult
 import retrofit2.Response
 import retrofit2.http.GET
@@ -28,4 +29,11 @@ interface TMDBApi {
         @Query("language") language: String,
         @Query("api_key") apiKey: String,
     ): Response<CreditsResult>
+
+    @GET("person/{person_id}")
+    suspend fun getPersonDetails(
+        @Path("person_id") id: Int,
+        @Query("language") language: String,
+        @Query("api_key") apiKey: String,
+    ): Response<PersonResult>
 }
