@@ -99,6 +99,17 @@
         app:layout_constraintTop_toTopOf="@+id/titleBackground"
         tools:src="@drawable/mandalorian" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/push_message"
+        app:layout_constraintBottom_toBottomOf="@+id/titleBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleBackground"
+        app:srcCompat="@drawable/ic_message" />
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollview"
         android:layout_width="0dp"
@@ -165,7 +176,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:constraint_referenced_ids="castTitle,recyclerPeople" />
+
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerPeople"
+                app:tabMode="scrollable" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.motion.widget.MotionLayout>

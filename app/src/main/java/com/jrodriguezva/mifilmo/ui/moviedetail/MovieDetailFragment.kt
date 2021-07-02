@@ -8,9 +8,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.google.android.material.tabs.TabLayoutMediator
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.databinding.FragmentMovieDetailBinding
 import com.jrodriguezva.mifilmo.ui.main.MainActivity
+import com.jrodriguezva.mifilmo.ui.moviedetail.adapter.MessagesViewPagerAdapter
 import com.jrodriguezva.mifilmo.ui.moviedetail.adapter.MoviePeoplesAdapter
 import com.jrodriguezva.mifilmo.utils.extensions.fromMinutesToHHmm
 import com.jrodriguezva.mifilmo.utils.extensions.loadBackdrop
@@ -25,7 +28,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
     private var fragmentBinding: FragmentMovieDetailBinding? = null
     private val adapter = MoviePeoplesAdapter()
-
+    private val args by navArgs<MovieDetailFragmentArgs>()
     private val viewModel: MovieDetailViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,6 +72,27 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         binding.home.setOnClickListener {
             navController.navigateUp()
         }
+
+        val adapterViewpager = MessagesViewPagerAdapter(args.movieId, this)
+        binding.viewPager.adapter = adapterViewpager
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> getString(R.string.my_messages)
+
+                else -> getString(R.string.all_messages)
+
+            }
+        }.attach()
+
+        binding.floatingActionButton.setOnClickListener { navigateToDialog() }
+    }
+
+    private fun navigateToDialog() {
+        val dir = MovieDetailFragmentDirections.actionMovieDetailFragmentToPushMessageFragment(
+            args.movieId
+        )
+        findNavController().navigate(dir)
     }
 
     override fun onDestroyView() {

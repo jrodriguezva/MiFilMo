@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="16dp"
+    android:orientation="vertical"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_padding_size_small"
+            android:layout_marginVertical="@dimen/margin_padding_size_small"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/red_200"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintEnd_toStartOf="@+id/date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="New Title" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_padding_size_small"
+            android:layout_marginVertical="@dimen/margin_padding_size_small"
+            android:textAppearance="?attr/textAppearanceSubtitle2"
+            app:layout_constraintBaseline_toBaselineOf="@+id/name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/name"
+            app:layout_constraintTop_toTopOf="@+id/name"
+            tools:text="20-12-202" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_padding_size_small"
+            android:layout_marginVertical="@dimen/margin_padding_size_small"
+            android:textAppearance="?attr/textAppearanceSubtitle2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="20-12-202" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

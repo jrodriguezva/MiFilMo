@@ -41,4 +41,9 @@
     <string name="biography">Biography</string>
     <string name="known_for_department">Known for</string>
     <string name="data">Datos</string>
+    <string name="all_messages">All messages</string>
+    <string name="my_messages">My messages</string>
+    <string name="push_message">Push message</string>
+    <string name="message">Message</string>
+    <string name="send">Send</string>
 </resources>

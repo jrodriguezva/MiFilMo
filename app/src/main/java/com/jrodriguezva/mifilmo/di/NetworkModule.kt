@@ -8,10 +8,12 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.jrodriguezva.mifilmo.BuildConfig
+import com.jrodriguezva.mifilmo.data.datasource.network.MessageNetworkDataSource
 import com.jrodriguezva.mifilmo.data.datasource.network.MovieNetworkDataSource
 import com.jrodriguezva.mifilmo.data.datasource.network.PersonNetworkDataSource
 import com.jrodriguezva.mifilmo.data.datasource.network.UserNetworkDataSource
 import com.jrodriguezva.mifilmo.framework.network.NetworkUtils
+import com.jrodriguezva.mifilmo.framework.network.message.MessageNetworkDataSourceImpl
 import com.jrodriguezva.mifilmo.framework.network.movie.MovieNetworkDataSourceImpl
 import com.jrodriguezva.mifilmo.framework.network.movie.TMDBApi
 import com.jrodriguezva.mifilmo.framework.network.person.PersonNetworkDataSourceImpl
@@ -88,6 +90,17 @@ object NetworkModule {
             database,
             auth,
             networkUtils
+        )
+
+    @Provides
+    @Singleton
+    fun provideMessageNetworkDataSourceImpl(
+        database: FirebaseDatabase,
+        auth: FirebaseAuth,
+    ): MessageNetworkDataSource =
+        MessageNetworkDataSourceImpl(
+            database,
+            auth
         )
 
     @Provides

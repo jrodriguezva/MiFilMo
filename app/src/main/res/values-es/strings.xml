@@ -41,4 +41,9 @@
     <string name="biography">Información</string>
     <string name="known_for_department">Conocido por</string>
     <string name="data">Datos</string>
+    <string name="all_messages">Todos los mensaje</string>
+    <string name="my_messages">Mis mensajes</string>
+    <string name="push_message">Enviar mensaje</string>
+    <string name="message">Mensaje</string>
+    <string name="send">Enviar</string>
 </resources>

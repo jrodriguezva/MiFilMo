@@ -15,6 +15,11 @@ fun String.toDate(): Date {
 }
 
 fun Date.formatToBirthday(): String {
-    return SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(this)
+    return SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(this)
+
+}
+
+fun Date.formatLarge(): String {
+    return SimpleDateFormat("dd MMMM yyyy, hh:mm", Locale.getDefault()).format(this)
 
 }

@@ -2,14 +2,17 @@ package com.jrodriguezva.mifilmo.di
 
 import com.jrodriguezva.mifilmo.data.datasource.local.MovieLocalDataSource
 import com.jrodriguezva.mifilmo.data.datasource.local.PersonLocalDataSource
+import com.jrodriguezva.mifilmo.data.datasource.network.MessageNetworkDataSource
 import com.jrodriguezva.mifilmo.data.datasource.network.MovieNetworkDataSource
 import com.jrodriguezva.mifilmo.data.datasource.network.PersonNetworkDataSource
 import com.jrodriguezva.mifilmo.data.datasource.network.UserNetworkDataSource
 import com.jrodriguezva.mifilmo.data.datasource.preferences.PreferenceDataSource
 import com.jrodriguezva.mifilmo.data.repository.AuthRepositoryImpl
+import com.jrodriguezva.mifilmo.data.repository.MessageRepositoryImpl
 import com.jrodriguezva.mifilmo.data.repository.MovieRepositoryImpl
 import com.jrodriguezva.mifilmo.data.repository.PersonRepositoryImpl
 import com.jrodriguezva.mifilmo.domain.repository.AuthRepository
+import com.jrodriguezva.mifilmo.domain.repository.MessageRepository
 import com.jrodriguezva.mifilmo.domain.repository.MovieRepository
 import com.jrodriguezva.mifilmo.domain.repository.PersonRepository
 import dagger.Module
@@ -56,6 +59,20 @@ object RepositoryModule {
         PersonRepositoryImpl(
             personNetworkDataSource,
             personLocalDataSource,
+            preferenceDataSource,
+            dispatcher
+        )
+
+
+    @Singleton
+    @Provides
+    fun provideMessageRepository(
+        messageNetworkDataSource: MessageNetworkDataSource,
+        preferenceDataSource: PreferenceDataSource,
+        dispatcher: CoroutineDispatcher,
+    ): MessageRepository =
+        MessageRepositoryImpl(
+            messageNetworkDataSource,
             preferenceDataSource,
             dispatcher
         )
