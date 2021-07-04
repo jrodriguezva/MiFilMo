@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupViews()
-        Log.e("BaseActivity", "onCreate: ")
     }
 
     private fun setupViews() {

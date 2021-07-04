@@ -1,5 +1,6 @@
 package com.jrodriguezva.mifilmo.framework.network.movie
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -69,7 +70,7 @@ class MovieNetworkDataSourceImpl(
 
     @ExperimentalCoroutinesApi
     override fun getFavoriteMovies() = callbackFlow {
-        firebaseUser.uid?.let { uid ->
+        firebaseUser.currentUser?.uid?.let { uid ->
             val myRef = firebaseDatabase.reference.child(uid).child("movies")
             val listener = object : ChildEventListener {
                 override fun onCancelled(error: DatabaseError) {
@@ -101,7 +102,7 @@ class MovieNetworkDataSourceImpl(
     }
 
     override fun saveFavoriteMovie(movie: Movie) {
-        firebaseUser.uid?.let {
+        firebaseUser.currentUser?.uid?.let {
             firebaseDatabase.reference.child(it).child("movies").child("${movie.id}")
                 .setValue(movie)
         }

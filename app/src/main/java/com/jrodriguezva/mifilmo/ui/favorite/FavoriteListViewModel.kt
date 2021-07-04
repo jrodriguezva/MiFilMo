@@ -28,7 +28,7 @@ class FavoriteListViewModel @Inject constructor(
     val movies: Flow<List<Movie>> get() = getAllFavoriteMovies()
 
     fun discoverFavoriteMovies() {
-        viewModelScope.launch { discoverAllFavoriteMovies() }
+       viewModelScope.launch { discoverAllFavoriteMovies() }
     }
 
     fun onClickFavorite(movie: Movie) {

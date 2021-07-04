@@ -28,14 +28,17 @@ class UserNetworkDataSourceImpl(
     }
 
     override suspend fun updateUser(user: User) {
-        val path = user.photoUrl?.toUri()
-        val ref =
-            storage.reference.child("images").child(user.uid).child("${path?.lastPathSegment}")
-        path?.let { ref.putFile(it).await() }
+        val ref = user.photoUrl?.toUri()?.let { path ->
+            val ref =
+                storage.reference.child("images").child(user.uid).child("${path.lastPathSegment}")
+            ref.putFile(path).await()
+            ref
+        }
+
 
         val profileUpdates = userProfileChangeRequest {
             displayName = user.name
-            photoUri = ref.downloadUrl.await()
+            photoUri = ref?.downloadUrl?.await()
         }
         auth.currentUser?.updateProfile(profileUpdates)?.await()
     }

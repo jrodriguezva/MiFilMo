@@ -52,7 +52,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 }
                 launch {
                     viewModel.registered.collect {
-                        val direction = LoginFragmentDirections.actionLoginFragmentToMainActivity()
+                        val direction =
+                            RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
                         findNavController().navigate(direction)
                         requireActivity().finish()
                     }
