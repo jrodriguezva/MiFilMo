@@ -34,6 +34,18 @@ android {
         }
     }
 
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+
     flavorDimensions "version"
     productFlavors {
         demo {
