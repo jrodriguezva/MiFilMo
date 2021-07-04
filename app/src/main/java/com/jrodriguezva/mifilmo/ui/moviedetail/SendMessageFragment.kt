@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.jrodriguezva.mifilmo.R
 import com.jrodriguezva.mifilmo.databinding.FragmentSendMessageBinding
 import com.jrodriguezva.mifilmo.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SendMessageFragment : Fragment(R.layout.fragment_send_message) {
 
     private var fragmentBinding: FragmentSendMessageBinding? = null
-    private val args by navArgs<SendMessageFragmentArgs>()
 
     private val viewModel: SendMessageViewModel by viewModels()
 
@@ -24,6 +27,7 @@ class SendMessageFragment : Fragment(R.layout.fragment_send_message) {
         val binding = FragmentSendMessageBinding.bind(view)
         fragmentBinding = binding
         setBindings(binding)
+        setObservers()
     }
 
 
@@ -36,11 +40,22 @@ class SendMessageFragment : Fragment(R.layout.fragment_send_message) {
                         binding.textField.error = getString(R.string.required)
                     } else {
                         viewModel.sendMessage(text)
-                        findNavController().navigateUp()
                     }
                     true
                 }
                 else -> false
+            }
+        }
+    }
+
+    private fun setObservers() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.navigate.collect {
+                        if (it) findNavController().navigateUp()
+                    }
+                }
             }
         }
     }

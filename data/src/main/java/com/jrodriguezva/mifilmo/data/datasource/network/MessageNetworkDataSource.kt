@@ -6,6 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface MessageNetworkDataSource {
     fun getMessagesByMovie(movieId: Int, language: String): Flow<List<Message>>
     fun getMyMessagesByMovie(movieId: Int, language: String): Flow<List<Message>>
-    suspend fun pushMessage(message: Message)
-
+    suspend fun pushMessage(message: Message): Boolean
 }

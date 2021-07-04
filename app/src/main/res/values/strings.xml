@@ -46,4 +46,8 @@
     <string name="push_message">Push message</string>
     <string name="message">Message</string>
     <string name="send">Send</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name">Movie message updates</string>
+    <string name="fcm_message_title">New message</string>
+    <string name="fcm_message_description">"%s has written a new message"</string>
 </resources>

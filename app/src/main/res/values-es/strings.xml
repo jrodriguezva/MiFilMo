@@ -46,4 +46,7 @@
     <string name="push_message">Enviar mensaje</string>
     <string name="message">Mensaje</string>
     <string name="send">Enviar</string>
+    <string name="default_notification_channel_name">Actualizaciones de mensajes de películas</string>
+    <string name="fcm_message_title">Nuevo mensaje</string>
+    <string name="fcm_message_description">"%s ha escrito un nuevo mensaje"</string>
 </resources>

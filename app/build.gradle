@@ -22,6 +22,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "API_BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField("String", "API_FCM_BASE_URL", "\"https://fcm.googleapis.com/fcm/\"")
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -103,8 +104,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
 
-    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    fullImplementation 'com.google.android.gms:play-services-auth:19.0.0'
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.0"
 
@@ -112,7 +114,6 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     def nav_version = "2.3.5"
-    // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 

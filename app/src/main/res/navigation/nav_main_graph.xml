@@ -51,6 +51,10 @@
         <action
             android:id="@+id/action_movieDetailFragment_to_pushMessageFragment"
             app:destination="@id/pushMessageFragment" />
+        <deepLink
+            android:id="@+id/movieDeepLink"
+            app:uri="mifilmo.jrodrigueva.com/movie/{movieId}" />
+
     </fragment>
 
     <fragment

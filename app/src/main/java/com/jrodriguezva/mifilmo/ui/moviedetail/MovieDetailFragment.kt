@@ -90,8 +90,9 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
     private fun navigateToDialog() {
         val dir = MovieDetailFragmentDirections.actionMovieDetailFragmentToPushMessageFragment(
-            args.movieId
-        )
+            args.movieId,
+
+            )
         findNavController().navigate(dir)
     }
 
