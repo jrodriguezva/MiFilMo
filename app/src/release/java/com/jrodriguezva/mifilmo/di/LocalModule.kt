@@ -43,7 +43,7 @@ object LocalModule {
             context,
             MiFilMoDatabase::class.java,
             DATABASE_NAME
-        ).fallbackToDestructiveMigration().build()
+        ).build()
     }
 
 }

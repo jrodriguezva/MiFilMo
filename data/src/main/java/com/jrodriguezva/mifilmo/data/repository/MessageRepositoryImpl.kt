@@ -31,5 +31,5 @@ class MessageRepositoryImpl(
 
         val result = messageNetworkDataSource.pushMessage(message)
         emit(Resource.Success(result))
-    }
+    }.flowOn(dispatcher)
 }
