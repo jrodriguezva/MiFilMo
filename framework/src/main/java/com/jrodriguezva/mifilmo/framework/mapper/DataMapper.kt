@@ -10,7 +10,7 @@ import com.jrodriguezva.mifilmo.framework.local.movie.model.PeopleDB
 import com.jrodriguezva.mifilmo.framework.local.person.model.PersonDB
 import com.jrodriguezva.mifilmo.framework.network.movie.MovieResult
 import com.jrodriguezva.mifilmo.framework.network.person.PersonResult
-import com.jrodriguezva.mifilmo.utils.extensions.toDate
+import com.jrodriguezva.mifilmo.framework.utils.toDate
 import com.jrodriguezva.mimofilms.data.remote.CastResponse
 
 

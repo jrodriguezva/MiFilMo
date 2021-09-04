@@ -2,3 +2,4 @@ rootProject.name = "MiFilMo"
 include ':app'
 include ':domain'
 include ':data'
+include ':framework'

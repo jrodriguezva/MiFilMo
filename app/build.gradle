@@ -94,8 +94,9 @@ android {
 dependencies {
     implementation project(path: ':domain')
     implementation project(path: ':data')
+    implementation project(path: ':framework')
 
-    def lifecycle_version = "2.4.0-alpha02"
+    def lifecycle_version = "2.4.0-alpha03"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
@@ -103,11 +104,11 @@ dependencies {
     def core_version = "1.6.0"
     implementation "androidx.core:core-ktx:$core_version"
 
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'androidx.activity:activity-ktx:1.2.3'
-    implementation 'androidx.fragment:fragment-ktx:1.3.5'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.activity:activity-ktx:1.3.1'
+    implementation 'androidx.fragment:fragment-ktx:1.3.6'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
     testImplementation 'junit:junit:4.13.2'
@@ -115,17 +116,17 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     testImplementation "io.mockk:mockk:1.11.0"
 
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.0"
+
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:28.2.0')
+    implementation platform('com.google.firebase:firebase-bom:28.4.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-database-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
 
-    fullImplementation 'com.google.android.gms:play-services-auth:19.0.0'
-
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.0"
+    fullImplementation 'com.google.android.gms:play-services-auth:19.2.0'
 
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"

@@ -16,8 +16,7 @@ import kotlinx.coroutines.flow.flowOn
 class AuthRepositoryImpl(
     private val userNetworkDataSource: UserNetworkDataSource,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
-) :
-    AuthRepository {
+) : AuthRepository {
 
     override fun getCurrentUser(): Flow<Resource<User>> = flow {
         emit(Resource.Loading)
